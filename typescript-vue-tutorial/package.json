@@ -1,0 +1,30 @@
+{
+  "name": "typescript-vue-tutorial",
+  "version": "1.0.0",
+  "description": "typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/.bin/webpack",
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "wtfs": "NODE_ENV=wtfs node_modules/.bin/webpack"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "ts-loader": "^3.1.1",
+    "typescript": "^2.6.2",
+    "vue-loader": "^13.5.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-template-compiler": "^2.5.9",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.5"
+  },
+  "dependencies": {
+    "vue": "^2.5.9"
+  }
+}
