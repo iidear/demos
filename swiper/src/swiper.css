@@ -1,0 +1,24 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.swiper-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.swiper {
+  display: flex;
+}
+
+.swiper__item {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
