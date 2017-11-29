@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initialScale=1,maximum-scale=1,minimum-scale=1">
+  <title>G2 start</title>
+</head>
+<body>
+<div id="start"></div>
+
+<script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.5/g2/3.0.0/g2.min.js"></script>
+
+<script type="text/javascript">
+  const data = [
+    {name: 'xx', value: 123},
+    {name: 'yy', value: 204},
+    {name: 'zz', value: 80}
+  ]
+
+  const chart = new G2.Chart({
+    container: 'start',
+    forceFit: true,
+    height: 300
+  })
+
+  chart.source(data)
+
+  chart.interval().position('name*value').color('name')
+
+  chart.render()
+</script>
+</body>
+</html>

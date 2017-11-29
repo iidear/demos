@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <title>中国地图</title>
+    <link rel="stylesheet" type="text/css" href="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.7/katex-0.8.3/katex.min.css" />
+    <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;}</style>
+</head>
+<body>
+<div id="mountNode"></div>
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.5/g2/3.0.0/g2.min.js"></script>
+<script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.5/data-set/0.6.2/data-set.min.js"></script>
+<script src="https://gw.alipayobjects.com/as/g/datavis/assets/1.0.1/jquery-3.2.1.min.js"></script>
+<script>
+  $.getJSON('/assets/china-geo.json', data => {
+    $.getJSON('/assets/population.json', populationData => {
+      const { features } = data;
+      const userData = [];
+      for(let i=0; i<features.length; i++) {
+        const name = features[i].properties.name;
+        userData.push({
+          name,
+          value: populationData[name] || 0
+        });
+      }
+      // data set
+      const ds = new DataSet();
+      // geo data
+      const dvGeo = ds.createView().source(data, {
+        type: 'GeoJSON'
+      });
+
+
+      const chart = new G2.Chart({
+        container: 'mountNode',
+        forceFit: true
+      })
+      chart.tooltip(true, {
+        showTitle: false
+      })
+      chart.axis(false)
+
+      const mapView = chart.view().source(dvGeo)
+      mapView.polygon()
+        .tooltip(false)
+        .position('longitude*latitude')
+        .label('name')
+
+      const dvPop = ds.createView().source(userData);
+      dvPop.transform({
+        type: 'geo.region',
+        field: 'name',
+        geoDataView: dvGeo,
+        as: ['longitude', 'latitude']
+      });
+
+      const popView = chart.view().source(dvPop)
+      popView.polygon()
+        .position('longitude*latitude')
+        .tooltip('name*value')
+        .color('value', 'green-red')
+        .style({
+          lineWidth: 0.5,
+          stroke: '#FFF'
+        })
+
+      chart.render()
+    })
+  })
+</script>
+</body>
+</html>
