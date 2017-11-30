@@ -1,0 +1,19 @@
+{
+  "name": "mvvm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/http-server -p 8024",
+    "rollup": "node_modules/.bin/rollup -c rollup.config.js --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.10.0",
+    "rollup": "^0.52.0",
+    "rollup-plugin-typescript2": "^0.8.4",
+    "typescript": "^2.6.2"
+  }
+}
